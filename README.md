@@ -1,500 +1,391 @@
+> **Nota:** Esta traducción conserva exactamente los comandos, las rutas, los nombres técnicos y el código del proyecto.
+
 # TigerPOD
 
-[![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-blue.svg)](LICENSE)
+[![Licencia: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-blue.svg)](LICENSE)
 
-**A CD player, for spools.**
+**Un reproductor de CD para bobinas.**
 
-The TigerPOD is an open-source desktop **NFC / RFID reader and writer (burner) for
-3D-printing filament spools**, built from two commodity USB readers and a 3D-printed
-shell. Drop a filament spool in and your computer reads its TigerTag chip — material,
-brand, colour, temperatures, what's left. Write (encode) a tag the same way: put the
-spool in, done. No aiming, no hunting for the sticker.
+El TigerPOD es un lector y grabador **NFC / RFID de escritorio de código abierto para carretes de filamento de impresión 3D**, construido a partir de dos lectores básicos USB y una carcasa impresa en 3D. Coloca una bobina de filamento y el ordenador leerá su chip TigerTag: material, marca, color, temperaturas y cantidad restante. Para escribir (codificar) una etiqueta, basta con colocar la bobina. Sin apuntar ni buscar la etiqueta.
 
-![The TigerPOD, printed in every colour, each cradling a filament spool](assets/lineup/TigerPOD-lineup-9.jpg)
+![El TigerPOD, impreso en todos los colores, cada uno con un carrete de filamento](assets/lineup/TigerPOD-lineup-9.jpg)
 
-![The TigerPOD reading a spool in Tiger Studio](assets/TigerPOD-demo.gif)
+![El TigerPOD leyendo una bobina en Tiger Studio](assets/TigerPOD-demo.gif)
 
-<sub>▶ Higher-quality clip: [TigerPOD-demo.mp4](assets/TigerPOD-demo.mp4)</sub>
+<sub>▶ Clip de mayor calidad: [TigerPOD-demo.mp4](assets/TigerPOD-demo.mp4)</sub>
 
-> **Fits ~99% of 1 kg spools**, whatever the type — plastic masterspools, cardboard
-> spools, and non-reusable plastic or refill spools all drop right in.
+> **Admite aproximadamente el 99 % de las bobinas de 1 kg**, ya sean bobinas maestras de plástico, de cartón, de plástico no reutilizables o de recambio. Basta con colocarlas en el Pod.
 
-**Contents:** [A first of its kind](#a-first-of-its-kind) ·
-[Why it exists](#why-it-exists) ·
-[Free electronics, free design](#free-electronics-free-design) ·
-[A universal NFC station](#more-than-tigertag--a-universal-nfc-station) ·
-[Ecosystem comparison](#how-the-filament-rfid-ecosystems-compare) ·
-[Build one](#build-one) · [Or buy the kit](#or-buy-the-kit) ·
-[The ecosystem](#the-ecosystem-around-it) ·
-[Read a tag in your own code](#read-a-tag-in-your-own-code) · [FAQ](#faq) ·
-[Contributing](#contributing) · [Licence](#licence)
+**Contenido:** [El primero de su tipo](#el-primero-de-su-tipo) · [Por qué existe](#por-qué-existe) · [Electrónica y diseño libres](#electrónica-y-diseño-libres) · [Una estación NFC universal](#más-que-tigertag-una-estación-nfc-universal) · [Comparativa de ecosistemas](#comparativa-de-los-ecosistemas-rfid-para-filamento) · [Construye uno](#construye-uno) · [Compra el kit](#o-compra-el-kit) · [El ecosistema](#el-ecosistema-que-lo-rodea) · [Lee una etiqueta con tu propio código](#lee-una-etiqueta-con-tu-propio-código) · [Preguntas frecuentes](#preguntas-frecuentes) · [Colabora](#colabora) · [Licencia](#licencia)
 
-## A first of its kind
+## El primero de su tipo
 
-As far as we know, **the TigerPOD is the first spool-scale NFC/RFID reader/burner of its
-kind** — nobody had done this before. It was imagined by **Benoit Michaut**, a French
-maker who has been passionate about 3D printing since 2015, in **2023, alongside the
-creation of the open-source TigerTag protocol**: take **two standard, low-cost USB NFC
-readers**,
-drop one on each side of a 3D-printed spool holder, and you get a device that reads *and*
-writes (burns) both chips of a filament spool at once. No custom PCB, no proprietary
-reader, no dedicated silicon.
+Hasta donde sabemos, **el TigerPOD es el primer lector/grabador NFC/RFID a escala de carrete de su tipo**; nadie había hecho esto antes. Fue imaginado por **Benoit Michaut**, un fabricante francés apasionado por la impresión 3D desde 2015, en **2023, junto con la creación del protocolo de código abierto TigerTag**: basta con colocar **dos lectores NFC USB estándar y económicos**, uno a cada lado de un soporte para bobinas impreso en 3D. Así se pueden leer y escribir a la vez los dos chips de una bobina de filamento. No hace falta una placa electrónica personalizada, un lector propietario ni un chip dedicado.
 
-That turns encoding a spool's NFC chips — normally an industrial, closed process — into
-something anyone can build on their desk for the price of two commodity readers. The goal
-isn't the gadget, it's **democratising RFID for filament** through the open
-[**TigerTag**](https://github.com/TigerTag-Project/TigerTag-RFID-Guide) protocol so any
-maker, brand, or printer can adopt it freely.
+Eso convierte la codificación de chips NFC de un carrete (normalmente un proceso industrial cerrado) en algo que cualquiera puede construir en su escritorio por el precio de dos lectores básicos. El objetivo no es el dispositivo, es **democratizar RFID para filamento** a través del protocolo abierto [**TigerTag**](https://github.com/TigerTag-Project/TigerTag-RFID-Guide) para que cualquier fabricante, marca o impresor pueda adoptarlo libremente.
 
-### From the factory to the kitchen table
+### De la fábrica a la mesa de la cocina
 
-This is the part that matters. The TigerPOD is the **first consumer-grade device for
-material identification in 3D printing** — it took a capability that belonged to industry
-and put it on a desk.
+Esta es la parte importante. El TigerPOD es el **primer dispositivo de consumo para identificar materiales en la impresión 3D**: lleva al escritorio una capacidad que antes estaba reservada a la industria.
 
-|  | Before the TigerPOD | After the TigerPOD |
+|  | Antes del TigerPOD | Después del TigerPOD |
+
 |---|---|---|
-| **Who could encode material chips** | Large manufacturers only | Anyone, at home |
-| **What it took** | Industrial encoders, proprietary hardware, closed tooling, vendor contracts | Two commodity USB readers and a 3D print |
-| **Skills required** | Specialist | None — no electronics, no soldering |
-| **Cost** | Capital expenditure | The price of two cheap readers |
 
-Today, at home and for very little money, **anyone can read a chip, write a new one, change
-what's already on it, and wipe it clean again.** Before this, that technology was reserved
-for big industry. That shift, not the plastic shell, is what the TigerPOD really is.
+| **¿Quién podría codificar chips de materiales?** | Sólo grandes fabricantes | Cualquiera, en casa |
 
-And it works **for filament, in Dual NFC** — both chips of a spool at once — on **standard
-spools of any brand**, with **any chip technology the ACR122U supports** (MIFARE, NTAG and
-others). Not one vendor's ecosystem: all of them.
+| **Lo que hizo falta** | Codificadores industriales, hardware propietario, herramientas cerradas, contratos con proveedores | Dos lectores básicos USB y una impresión 3D |
 
-<sub>*(Developers: that's full **CRUD** — create, read, update, delete — on an NFC tag.)*</sub>
+| **Habilidades requeridas** | Especialista | Ninguno: sin electrónica ni soldadura |
 
-New to RFID for filament? Start with the
-[**TigerTag RFID Guide**](https://github.com/TigerTag-Project/TigerTag-RFID-Guide) — the
-open spec and public registry behind the Pod.
+| **Costo** | Gastos de capital | El precio de dos lectores baratos |
 
-## Why it exists
+Hoy en día, en casa y por muy poco dinero, **cualquiera puede leer un chip, escribir uno nuevo, cambiar lo que ya tiene y limpiarlo nuevamente**. Antes de esto, esa tecnología estaba reservada a las grandes industrias. Ese cambio, no la carcasa de plástico, es lo que realmente es el TigerPOD.
 
-The Pod was first imagined for **mass programming at third-party filament factories**. The
-brief was demanding: a way to encode spools that is **cheap, easy to build locally, and
-duplicable in large quantities at the lowest possible cost**, without giving up any
-capability. With commodity readers and a printed shell, the **development cost is
-essentially zero** — a Pod can be produced anywhere in the world, locally, in quantity.
+Y funciona **para filamento, en Dual NFC** (ambos chips de un carrete a la vez) en **carretes estándar de cualquier marca**, con **cualquier tecnología de chip que admita el ACR122U** (MIFARE, NTAG y otros). No es el ecosistema de un solo proveedor: todos ellos.
 
-The ACR122U is deliberate: it's an extremely common reader, **easy to find anywhere for
-very little money**. And there's nothing to learn — **no electronics knowledge, no
-soldering, no difficulty**. Print the shell, slide in two readers: a five-year-old could
-assemble a TigerPOD.
+<sub>*(Desarrolladores: eso es completo **CRUD** (crear, leer, actualizar, eliminar) en una etiqueta NFC.)*</sub>
 
-From that factory-floor origin, we then **brought the Pod to everyone** with the launch of
-the [**Tiger Studio Manager**](https://github.com/TigerTag-Project/TigerTag-Studio-Manager)
-desktop app — the same encoding power on any maker's desk, not just a production line.
+¿Nuevo en RFID para filamento? Comience con la [**TigerTag Guía RFID**](https://github.com/TigerTag-Project/TigerTag-RFID-Guide): la especificación abierta y el registro público detrás del Pod.
 
-This is the founding premise of an open-source project that is **neutral and agnostic —
-tied to no printer maker and no filament brand**. The point is to put maximum value in
-everyone's hands and offer a genuinely low-cost path for users **everywhere on the
-planet**.
+## Por qué existe
 
-That's also why it works with **every NTAG — down to the small NTAG 213**: we optimised
-every byte of the chip to pack the most data into the least space. And because a TigerTag
-chip is a standard NFC tag, **any phone with an NFC reader can read it** — so you can read
-*and write* TigerTag chips with nothing but a smartphone, no Pod required.
+El Pod se imaginó por primera vez para **programación masiva en fábricas de filamentos de terceros**. El encargo era exigente: una manera de codificar bobinas que sea **barata, fácil de construir localmente y duplicable en grandes cantidades al menor costo posible**, sin renunciar a ninguna capacidad. Con lectores básicos y una carcasa impresa, el **costo de desarrollo es esencialmente cero**: un Pod se puede producir en cualquier parte del mundo, localmente y en cantidad.
 
-## Free electronics, free design
+El ACR122U es intencionado: es un lector extremadamente común, **fácil de encontrar en cualquier lugar por muy poco dinero**. Y no hay nada que aprender: **sin conocimientos de electrónica, sin soldadura, sin dificultades**. Imprime la carcasa, introduce dos lectores: un niño de cinco años podría montar un TigerPOD.
 
-There is no custom silicon in a TigerPOD, and that is the point:
+Desde ese origen en la fábrica, luego **llevamos el Pod a todos** con el lanzamiento de la aplicación de escritorio [**Tiger Studio Manager**](https://github.com/TigerTag-Project/TigerTag-Studio-Manager): la misma potencia de codificación en el escritorio de cualquier fabricante, no solo en una línea de producción.
 
-- **Two [ACR122U-compatible NFC readers](https://amzn.to/4vok3d7)** — commodity hardware, sold everywhere, by everyone.
-- **A single 3D-printed shell** with two slots — you slide an ACR122U into each side.
-  No assembly, no screws, no wiring.
-- **A splitter** (2× USB-B → 1× USB-C) so the whole thing is one tidy cable.
+Esta es la premisa fundamental de un proyecto de código abierto que es **neutral e agnóstico, no vinculado a ningún fabricante de impresoras ni a ninguna marca de filamentos**. La cuestión es poner el máximo valor en manos de todos y ofrecer una ruta realmente de bajo coste para los usuarios **en todo el planeta**.
 
-<p>
-  <img src="assets/TigerPOD-reader-acr122u.jpg" alt="ACR122U-compatible USB NFC reader" width="200">
-  <img src="assets/TigerPOD-reader-acr122u.jpg" alt="ACR122U-compatible USB NFC reader" width="200">
-  <img src="assets/TigerPOD-splitter.jpg" alt="2-to-1 USB splitter" width="200">
-</p>
+Por eso también funciona con **todos los NTAG, hasta el pequeño NTAG 213**: optimizamos cada byte del chip para empaquetar la mayor cantidad de datos en el menor espacio. Y debido a que un chip TigerTag es una etiqueta NFC estándar, **cualquier teléfono con un lector NFC puede leerlo**, por lo que puede leer *y escribir* chips TigerTag con nada más que un teléfono inteligente, sin necesidad de Pod.
 
-<sub>The three parts we use: two [ACR122U-compatible readers](https://amzn.to/4vok3d7) + one [USB splitter](https://amzn.to/4plgsv8) — two readers go in each Pod.</sub>
+## Electrónica y diseño libres
 
-### Why two chips and two readers
+No hay silicio personalizado en un TigerPOD, y ese es el punto:
 
-The recommended setup is **two NFC chips per spool and two NFC readers** — one chip on
-each side of the spool, one reader facing each chip:
+- **Dos [lectores ACR122U compatibles con NFC](https://amzn.to/4vok3d7)**: hardware básico, vendido en todas partes y por todos.
 
-- **No aiming.** Whichever way you drop the spool in, a chip is always in front of a
-  reader. Nothing to line up.
-- **Twin Tag stays in sync.** With a reader on each side, the Pod reads and writes
-  **both chips at once** — the pair stays byte-identical, and your inventory counts
-  one spool, not two tags.
+- **Una única carcasa impresa con 3D** con dos ranuras: desliza un ACR122U en cada lado.
 
-A single chip and a single reader still work, but you lose the drop-and-go convenience
-(you have to present the tagged side) and the automatic Twin Tag sync.
+Sin montaje, sin tornillos, sin cableado.
 
-Any [NTAG 213 / 215 / 216](https://amzn.to/3TzxGc7) works. Nothing is proprietary, nothing phones home.
+- **Un divisor** (2× USB-B → 1× USB-C) para que todo sea un cable ordenado.
 
-### It's a concept, not a fixed product
+<p> <img src="assets/TigerPOD-reader-acr122u.jpg" alt="ACR122U-compatible USB NFC reader" width="200"> <img src="assets/TigerPOD-reader-acr122u.jpg" alt="ACR122U-compatible USB NFC reader" width="200"> <img src="assets/TigerPOD-splitter.jpg" alt="2-to-1 USB splitter" width="200"> </p>
 
-Strip it down and the TigerPOD is one idea: **two ACR122U readers facing each other, held
-at the right distance by a 3D-printed support.** That's it.
+<sub>Las tres partes que utilizamos: dos [lectores compatibles con ACR122U](https://amzn.to/4vok3d7) + un [divisor USB](https://amzn.to/4plgsv8): dos lectores van en cada unidad.</sub>
 
-The shell we publish simply happens to cradle a **standard 1 kg spool** — but **the shape
-is yours to change.** Redesign the support for another spool format, another object, or a
-completely different use, and it's still a Pod. Only the two facing readers matter; the
-holder around them is an implementation detail. Remix it — and
-[share what you make](CONTRIBUTING.md).
+### ¿Por qué dos chips y dos lectores?
 
-We did exactly that ourselves — there are now **two shells to print**, same two-reader concept:
+La configuración recomendada es **dos chips NFC por carrete y dos lectores NFC**: un chip a cada lado del carrete, un lector frente a cada chip:
 
-<img src="assets/TigerPOD-mini.jpg" align="right" width="230" alt="The compact TigerPOD Mini reading a spool">
+- **Sin apuntar.** Cualquiera que sea la forma en que coloques el carrete, siempre habrá un chip delante de un
 
-- **[TigerPOD Mini](https://makerworld.com/fr/models/3190348-tigerpod-mini-for-openspool-tigertag-rfid-filament)** — *recommended.* A redesigned, more compact shell: it **prints faster**, **uses less filament**, takes up **less desk space**, and **routes the cables inside** (integrated cable management). Same two ACR122U readers facing each other, and it reads and writes both **TigerTag** and **OpenSpool** (NDEF) tags. It's simply a better Pod than the original.
-- **[TigerPOD (original)](https://makerworld.com/fr/models/1289152-tigertag-io-open-spool-pod-for-rfid-filament)** — the first shell, sized for a standard 1 kg spool.
+lector. Nada que hacer fila.
 
-Both are the same Pod under the skin — pick whichever suits your desk.
+- **Twin Tag permanece sincronizado.** Con un lector en cada lado, el Pod lee y escribe
+
+**ambos chips a la vez**: el par permanece en bytes idénticos y su inventario cuenta con un carrete, no con dos etiquetas.
+
+Un solo chip y un solo lector aún funcionan, pero se pierde la comodidad de colocar y usar (debe presentar el lado etiquetado) y la sincronización automática de Twin Tag.
+
+Cualquier [NTAG 213/215/216](https://amzn.to/3TzxGc7) funciona. Nada es propietario, nada llama a casa.
+
+### Es un concepto, no un producto fijo.
+
+Si lo quitamos, el TigerPOD es una idea: **dos lectores ACR122U uno frente al otro, mantenidos a la distancia adecuada mediante un soporte impreso 3D.** Eso es todo.
+
+La carcasa que publicamos simplemente sostiene un **una bobina estándar de 1 kg**, pero **la forma es tuya para cambiarla**. Rediseña el soporte para otro formato de bobina, otro objeto o un uso completamente diferente, y sigue siendo un Pod. Sólo importan los dos lectores enfrentados; el titular que los rodea es un detalle de implementación. Mézclalo y [comparte lo que haces](CONTRIBUTING.md).
+
+Hicimos exactamente eso nosotros mismos: ahora hay **dos carcasas para imprimir**, el mismo concepto de dos lectores:
+
+<img src="assets/TigerPOD-mini.jpg" align="right" width="230" alt="The compact TigerPOD Mini reading a bobina">
+
+- **[TigerPOD Mini](https://makerworld.com/fr/models/3190348-tigerpod-mini-for-openbobina-tigertag-rfid-filament)** — *recomendado.* Una carcasa rediseñada y más compacta: **imprime más rápido**, **utiliza menos filamento**, ocupa **menos espacio en el escritorio** y **enruta los cables por el interior** (gestión de cables integrada). Los mismos dos lectores ACR122U uno frente al otro, leen y escriben etiquetas **TigerTag** y **OpenSpool** (NDEF). Es simplemente un Pod mejor que el original.
+
+- **[TigerPOD (original)](https://makerworld.com/fr/models/1289152-tigertag-io-open-bobina-pod-for-rfid-filament)** — la primera carcasa, del tamaño de un carrete estándar de 1 kg.
+
+Ambos son el mismo Pod debajo de la piel: elige el que mejor se adapte a tu escritorio.
 
 <br clear="right">
 
-<sub>▲ The TigerPOD Mini — one upright reader on each side, cables tucked inside.</sub>
+<sub>▲ El TigerPOD Mini: un lector vertical a cada lado, cables escondidos en el interior.</sub>
 
-And since you print it yourself, **it comes in whatever colour you load.** Same Pod, your filament:
+Y como lo imprimes tú mismo, **viene en cualquier color que cargues.** El mismo Pod, tu filamento:
 
-<p>
-  <img src="assets/pods/TigerPOD-red.jpg" width="108" alt="Red TigerPOD">
-  <img src="assets/pods/TigerPOD-orange.jpg" width="108" alt="Orange TigerPOD">
-  <img src="assets/pods/TigerPOD-yellow.jpg" width="108" alt="Yellow TigerPOD">
-  <img src="assets/pods/TigerPOD-green.jpg" width="108" alt="Green TigerPOD">
-  <img src="assets/pods/TigerPOD-cyan.jpg" width="108" alt="Cyan TigerPOD">
-  <img src="assets/pods/TigerPOD-blue.jpg" width="108" alt="Blue TigerPOD">
-  <img src="assets/pods/TigerPOD-purple.jpg" width="108" alt="Purple TigerPOD">
-  <img src="assets/pods/TigerPOD-pink.jpg" width="108" alt="Pink TigerPOD">
-  <img src="assets/pods/TigerPOD-gold.jpg" width="108" alt="Gold TigerPOD">
-  <img src="assets/pods/TigerPOD-copper.jpg" width="108" alt="Copper TigerPOD">
-  <img src="assets/pods/TigerPOD-silver.jpg" width="108" alt="Silver TigerPOD">
-  <img src="assets/pods/TigerPOD-grey.jpg" width="108" alt="Grey TigerPOD">
-  <img src="assets/pods/TigerPOD-black.jpg" width="108" alt="Black TigerPOD">
-  <img src="assets/pods/TigerPOD-white.jpg" width="108" alt="White TigerPOD">
-  <img src="assets/pods/TigerPOD-glow.jpg" width="108" alt="Glow-in-the-dark TigerPOD">
-</p>
+<p> <img src="assets/pods/TigerPOD-red.jpg" width="108" alt="Red TigerPOD"> <img src="assets/pods/TigerPOD-orange.jpg" width="108" alt="Orange TigerPOD"> <img src="assets/pods/TigerPOD-yellow.jpg" width="108" alt="Yellow TigerPOD"> <img src="assets/pods/TigerPOD-green.jpg" width="108" alt="Green TigerPOD"> <img src="assets/pods/TigerPOD-cyan.jpg" width="108" alt="Cyan TigerPOD"> <img src="assets/pods/TigerPOD-blue.jpg" width="108" alt="Blue TigerPOD"> <img src="assets/pods/TigerPOD-purple.jpg" width="108" alt="Purple TigerPOD"> <img src="assets/pods/TigerPOD-pink.jpg" width="108" alt="Pink TigerPOD"> <img src="assets/pods/TigerPOD-gold.jpg" width="108" alt="Gold TigerPOD"> <img src="assets/pods/TigerPOD-copper.jpg" width="108" alt="Copper TigerPOD"> <img src="assets/pods/TigerPOD-silver.jpg" width="108" alt="Silver TigerPOD"> <img src="assets/pods/TigerPOD-grey.jpg" width="108" alt="Grey TigerPOD"> <img src="assets/pods/TigerPOD-black.jpg" width="108" alt="Black TigerPOD"> <img src="assets/pods/TigerPOD-white.jpg" width="108" alt="White TigerPOD"> <img src="assets/pods/TigerPOD-glow.jpg" width="108" alt="Glow-in-the-dark TigerPOD"> </p>
 
-<sub>A few of the colours it's been printed in — plus brown, milk, pastel green and light grey in
-[`assets/pods/`](assets/pods).</sub>
+<sub>A algunos de los colores en los que se ha impreso, además de marrón, leche, verde pastel y gris claro en [`assets/pods/`](assets/pods).</sub>
 
-And whatever your filament does, the Pod does too — silk, galaxy, marble,
-glow-in-the-dark:
+Y haga lo que haga su filamento, el Pod también lo hace: seda, galaxia, mármol, brillo en la oscuridad:
 
-<p>
-  <img src="assets/pods/TigerPOD-silk-red.jpg" width="108" alt="Silk red TigerPOD">
-  <img src="assets/pods/TigerPOD-silk-pink.jpg" width="108" alt="Silk pink TigerPOD">
-  <img src="assets/pods/TigerPOD-silk-yellow.jpg" width="108" alt="Silk yellow TigerPOD">
-  <img src="assets/pods/TigerPOD-silk-blue.jpg" width="108" alt="Silk blue TigerPOD">
-  <img src="assets/pods/TigerPOD-silk-black.jpg" width="108" alt="Silk black TigerPOD">
-  <img src="assets/pods/TigerPOD-silk-gold.jpg" width="108" alt="Silk gold TigerPOD">
-  <img src="assets/pods/TigerPOD-silk-copper.jpg" width="108" alt="Silk copper TigerPOD">
-  <img src="assets/pods/TigerPOD-silk-silver.jpg" width="108" alt="Silk silver TigerPOD">
-  <img src="assets/pods/TigerPOD-galaxy-purple.jpg" width="108" alt="Galaxy purple TigerPOD">
-  <img src="assets/pods/TigerPOD-marble.jpg" width="108" alt="Marble TigerPOD">
-  <img src="assets/pods/TigerPOD-rainbow-linear.jpg" width="108" alt="Linear rainbow TigerPOD">
-  <img src="assets/pods/TigerPOD-rainbow-multi.jpg" width="108" alt="Multicolour rainbow TigerPOD">
-  <img src="assets/pods/TigerPOD-glow-green-dark.jpg" width="108" alt="Green glow-in-the-dark TigerPOD, lights off">
-  <img src="assets/pods/TigerPOD-glow-blue-dark.jpg" width="108" alt="Blue glow-in-the-dark TigerPOD, lights off">
-  <img src="assets/pods/TigerPOD-glow-red-dark.jpg" width="108" alt="Red glow-in-the-dark TigerPOD, lights off">
-</p>
+<p> <img src="assets/pods/TigerPOD-silk-red.jpg" width="108" alt="Silk red TigerPOD"> <img src="assets/pods/TigerPOD-silk-pink.jpg" width="108" alt="Silk pink TigerPOD"> <img src="assets/pods/TigerPOD-silk-yellow.jpg" width="108" alt="Silk yellow TigerPOD"> <img src="assets/pods/TigerPOD-silk-blue.jpg" width="108" alt="Silk blue TigerPOD"> <img src="assets/pods/TigerPOD-silk-black.jpg" width="108" alt="Silk black TigerPOD"> <img src="assets/pods/TigerPOD-silk-gold.jpg" width="108" alt="Silk gold TigerPOD"> <img src="assets/pods/TigerPOD-silk-copper.jpg" width="108" alt="Silk copper TigerPOD"> <img src="assets/pods/TigerPOD-silk-silver.jpg" width="108" alt="Silk silver TigerPOD"> <img src="assets/pods/TigerPOD-galaxy-purple.jpg" width="108" alt="Galaxy purple TigerPOD"> <img src="assets/pods/TigerPOD-marble.jpg" width="108" alt="Marble TigerPOD"> <img src="assets/pods/TigerPOD-rainbow-linear.jpg" width="108" alt="Linear rainbow TigerPOD"> <img src="assets/pods/TigerPOD-rainbow-multi.jpg" width="108" alt="Multicolour rainbow TigerPOD"> <img src="assets/pods/TigerPOD-glow-green-dark.jpg" width="108" alt="Green glow-in-the-dark TigerPOD, lights off"> <img src="assets/pods/TigerPOD-glow-blue-dark.jpg" width="108" alt="Blue glow-in-the-dark TigerPOD, lights off"> <img src="assets/pods/TigerPOD-glow-red-dark.jpg" width="108" alt="Red glow-in-the-dark TigerPOD, lights off"> </p>
 
-<sub>Full-resolution originals live in [`assets/pods/hd/`](assets/pods/hd), and transparent
-(background-removed) PNG cut-outs in [`assets/pods/cutout/`](assets/pods/cutout).</sub>
+<sub>Los originales de resolución completa se encuentran en [`assets/pods/hd/`](assets/pods/hd) y los recortes PNG transparentes (sin fondo) en [`assets/pods/cutout/`](assets/pods/cutout).</sub>
 
-## More than TigerTag — a universal NFC station
+## Más que TigerTag: una estación NFC universal
 
-The Pod is **not locked to the TigerTag protocol**. It is, quite literally, two standard
-PC/SC readers in a spool-shaped holder: **anything an ACR122U can do, the Pod can do.**
+El Pod **no está bloqueado con el protocolo TigerTag**. Se trata, literalmente, de dos lectores PC/SC estándar en un soporte con forma de carrete: **cualquier cosa que un ACR122U pueda hacer, el Pod puede hacerlo.**
 
-**You control the chip, completely.** Read what's on a tag, write something new to it,
-change what's already there, and erase it back to blank. The Pod does all four — no
-one-way street, no write-once, no vendor lock. *(Developers: that's full **CRUD** —
-create, read, update, delete.)*
+**Tú controlas el chip por completo.** Lee lo que hay en una etiqueta, escribe algo nuevo en ella, cambia lo que ya está ahí y bórralo para dejarlo en blanco. El Pod hace las cuatro cosas: sin calle de un solo sentido, sin escritura única, sin bloqueo de proveedor. *(Desarrolladores: eso es completo **CRUD**: crear, leer, actualizar, eliminar).*
 
-To be precise about the scope, that means full read/write/erase control **for filament, in
-Dual NFC** — both chips of a spool handled together — on **standard filament spools**,
-across **any brand** and **any chip technology the ACR122U supports** (MIFARE, NTAG, and
-the rest). Not one brand's spools. Not one chip family. Any of them.
+Para ser precisos en cuanto al alcance, eso significa control total de lectura/escritura/borrado **para filamento, en NFC dual** (ambos chips de un carrete manejados juntos) en **carretes de filamento estándar**, en **cualquier marca** y **cualquier tecnología de chip que admita el ACR122U** (MIFARE, NTAG y el resto). No son carretes de una sola marca. Ninguna familia de chips. Cualquiera de ellos.
 
-**A universal reader/writer.** The ACR122U handles far more than NTAG. It covers
-**ISO 14443 Type A and B**, **MIFARE** (Classic 1K/4K, Ultralight, DESFire), **FeliCa**,
-**Topaz/Jewel**, and **NFC Forum tag types 1–4**. Whatever you can read or write with an
-ACR122U, you can read or write in the Pod.
+**Un lector/grabador universal.** El ACR122U maneja mucho más que NTAG. Cubre **ISO 14443 Tipo A y B**, **MIFARE** (Classic 1K/4K, Ultralight, DESFire), **FeliCa**, **Topaz/Jewel** y **NFC Tipos de etiquetas de foro 1 a 4**. Todo lo que puedas leer o escribir con un ACR122U, podrás leerlo o escribirlo en el Pod.
 
-**Never locked, endlessly reusable.** A TigerTag is **never write-locked**. When a spool is
-done, erase and rewrite its chips as fresh TigerTags — as many times as you want.
+**Nunca bloqueado, infinitamente reutilizable.** Un TigerTag **nunca está bloqueado contra escritura**. Cuando un carrete esté listo, borre y reescriba sus chips como TigerTags nuevos, tantas veces como desee.
 
-**Give end-of-life spool chips a second life.** Recycle them into something else entirely:
-reprogram an NTAG as a plain **NDEF** tag and use it for **home automation, connected
-objects, Wi-Fi hand-off, a URL, a business card** — any NFC use case you like. And you can
-turn it back into a TigerTag whenever you want. The Pod writes **both ways**. The chip is a
-reusable asset, not single-use packaging — **zero e-waste**.
+**Dé una segunda vida a los chips de bobina al final de su vida útil.** Reciclelos para convertirlos en algo completamente diferente: reprograme un NTAG como una simple etiqueta **NDEF** y utilícelo para **automatización del hogar, objetos conectados, transferencia de Wi-Fi, una URL, una tarjeta de presentación**: cualquier caso de uso de NFC que desee. Y podrás volver a convertirlo en un TigerTag cuando quieras. El Pod escribe **en ambos sentidos**. El chip es un activo reutilizable, no un embalaje de un solo uso: **cero residuos electrónicos**.
 
-## How the filament RFID ecosystems compare
+## Comparativa de los ecosistemas RFID para filamento
 
-Most printer makers tag their spools. Almost all of them lock the tag. Here's the landscape,
-and where TigerTag sits in it:
+La mayoría de los fabricantes de impresoras etiquetan sus carretes. Casi todos cierran la etiqueta. Aquí está el paisaje y dónde se encuentra TigerTag:
 
-| Ecosystem | Chip | Can you write your own tag? | Android | iOS |
+| Ecosistema | viruta | ¿Puedes escribir tu propia etiqueta? | Android | iOS |
+
 |---|---|---|:---:|:---:|
-| **TigerTag** | NTAG 213 / 215 / 216 | **Yes** — never locked, erase and rewrite forever | ✅ | ✅ |
-| [Elegoo Canvas](https://github.com/ELEGOO-3D/ELEGOO-RFID-Tag-Guide) | NTAG213 | Yes — no encryption, no password, publicly documented | ✅ | ✅ |
-| [Anycubic ACE](https://help.simplyprint.io/en/article/all-about-nfc-rfid-for-filament-spools-bambu-openprinttag-creality-qidi-anycubic-more-19luyni/) | NTAG215 / 216 | Yes | ✅ | ✅ |
-| [Bambu Lab](https://github.com/Bambu-Research-Group/RFID-Tag-Guide) | MIFARE Classic 1K | **No** — data is encrypted *and* RSA-signed; the printer rejects any tag without a valid signature | ⚠️ | ❌ |
-| [Creality CFS](https://help.simplyprint.io/en/article/the-creality-material-standard-nfcrfid-for-the-creality-cfs-1crrofa/) | MIFARE Classic 1K | Not officially — proprietary and undocumented; only reverse-engineered community tools can | ⚠️ | ❌ |
-| [QIDI Box](https://help.simplyprint.io/en/article/the-qidi-material-standard-nfcrfid-for-the-qidi-box-ns0c8d/) | MIFARE Classic 1K | Not officially — proprietary format | ⚠️ | ❌ |
-| [Snapmaker U1](https://snapmakeru1-extended-firmware.pages.dev/rfid_support) | MIFARE Classic 1K | **No** — proprietary + RSA signature, official tags only | ⚠️ | ❌ |
 
-<sub>✅ works · ⚠️ only on Android phones whose NFC chipset supports MIFARE Classic (an NXP-family
-chipset — it is not guaranteed on every Android device) · ❌ impossible: Apple does not expose
-MIFARE Classic to apps, on any iPhone.</sub>
+| **TigerTag** | NTAG 213 / 215 / 216 | **Sí** — nunca bloquear, borrar y reescribir para siempre | ✅ | ✅ |
 
-Don't take our word for the split — two independent projects sort it the same way.
+| [Lienzo Elegoo](https://github.com/ELEGOO-3D/ELEGOO-RFID-Tag-Guide) | NTAG213 | Sí, sin cifrado, sin contraseña, documentado públicamente | ✅ | ✅ |
 
-[**OpenRFID**](https://github.com/suchmememanyskill/OpenRFID), a third-party library that
-parses filament tags from every major brand, routes Bambu Lab, Creality, QIDI and Snapmaker
-through its *authenticated MIFARE Classic* path (keys required), while Elegoo, Anycubic and
-**TigerTag** go through its plain *NTAG* path — no keys, no authentication.
+| [Anycubic ACE](https://help.simplyprint.io/en/article/all-about-nfc-rfid-for-filament-bobinas-bambu-openprinttag-creality-qidi-anycubic-more-19luyni/) | NTAG215/216 | Sí | ✅ | ✅ |
 
-[**xspool**](https://github.com/xperiments/xspool), a spool manager supporting Bambu Lab,
-Creality CFS, Anycubic ACE Pro and TigerTag, publishes its own capability table. This is
-**their table, not ours** — we didn't write a line of it:
+| [Laboratorio de Bambú](https://github.com/Bambu-Research-Group/RFID-Tag-Guide) | MIFARE Clásico 1K | **No**: los datos están cifrados *y* firmados por RSA; la impresora rechaza cualquier etiqueta sin firma válida | ⚠️ | ❌ |
 
-| Format | Tag type | Readable | Writable | Extra metadata |
+| [Creality CFS](https://help.simplyprint.io/en/article/the-creality-material-standard-nfcrfid-for-the-creality-cfs-1crrofa/) | MIFARE Clásico 1K | No oficialmente: propietario e indocumentado; sólo las herramientas comunitarias de ingeniería inversa pueden hacerlo | ⚠️ | ❌ |
+
+| [Caja QIDI](https://help.simplyprint.io/en/article/the-qidi-material-standard-nfcrfid-for-the-qidi-box-ns0c8d/) | MIFARE Clásico 1K | No oficialmente: formato propietario | ⚠️ | ❌ |
+
+| [Mesero U1](https://snapmakeru1-extended-firmware.pages.dev/rfid_support) | MIFARE Clásico 1K | **No** — propietario + firma RSA, solo etiquetas oficiales | ⚠️ | ❌ |
+
+<sub>✅ funciona · ⚠️ solo en teléfonos Android cuyo chipset NFC es compatible con MIFARE Classic (un chipset de la familia NXP; no está garantizado en todos los dispositivos Android) · ❌ imposible: Apple no expone MIFARE Classic a aplicaciones, en ningún iPhone.</sub>
+
+No confíe en nuestra palabra sobre la división: dos proyectos independientes lo resuelven de la misma manera.
+
+[**OpenRFID**](https://github.com/suchmememanyskill/OpenRFID), una biblioteca de terceros que analiza etiquetas de filamentos de todas las marcas principales, enruta Bambu Lab, Creality, QIDI y Snapmaker a través de su ruta *autenticada MIFARE Classic* (se requieren claves), mientras que Elegoo, Anycubic y **TigerTag** pasan por su *NTAG* simple. ruta: sin claves, sin autenticación.
+
+[**xbobina**](https://github.com/xperiments/xbobina), un administrador de bobina compatible con Bambu Lab, Creality CFS, Anycubic ACE Pro y TigerTag, publica su propia tabla de capacidades. Esta es **su tabla, no la nuestra**; no escribimos ni una línea:
+
+| Formato | Tipo de etiqueta | Legible | Escribible | Metadatos adicionales |
+
 |---|---|:---:|:---:|:---:|
+
 | **TigerTag** | NTAG 213/215/216 | ✅ | ✅ | ✅ |
-| BambuLab Official | MIFARE 1K | ✅ | ❌ | ❌ |
+
+| Oficial de BambuLab | MIFARE 1K | ✅ | ❌ | ❌ |
+
 | Creality CFS | MIFARE 1K | ✅ | ✅ | ❌ |
+
 | Anycubic ACE PRO | NTAG 213/215/216 | ✅ | ✅ | ❌ |
 
-<sub>Source: [xspool — supported formats](https://github.com/xperiments/xspool/blob/main/docs/vendors/vendors.md)</sub>
+<sub>Fuente: [xbobina — formatos admitidos](https://github.com/xperiments/xbobina/blob/main/docs/vendors/vendors.md)</sub>
 
-Bambu Lab is the only one that can't be written. And TigerTag is the only format in that
-table with **read, write *and* extra metadata** all supported.
+Bambu Lab es el único que no se puede escribir. Y TigerTag es el único formato en esa tabla que admite **lectura, escritura *y* metadatos adicionales**.
 
-TigerTag is implemented in both projects — alongside the majors, by people with no stake
-in it.
+TigerTag se implementa en ambos proyectos, junto con los grandes, por personas que no tienen ningún interés en ellos.
 
-Two things fall out of that table.
+De esa mesa se caen dos cosas.
 
-**The lock is cryptographic, not physical.** A MIFARE Classic 1K chip is perfectly
-rewritable — but Bambu Lab and Snapmaker sign their payload, so a tag you write yourself is
-refused by the printer. The chip in your hand is fine; the ecosystem simply won't accept it.
-TigerTag signs nothing you can't reproduce and locks nothing: the tag stays yours.
+**El bloqueo es criptográfico, no físico.** Un chip MIFARE Classic 1K es perfectamente regrabable, pero Bambu Lab y Snapmaker firman su carga útil, por lo que la impresora rechaza una etiqueta que usted escribe. El chip que tienes en la mano está bien; el ecosistema simplemente no lo aceptará. TigerTag no firma nada que no puedas reproducir ni bloquea nada: la etiqueta sigue siendo tuya.
 
-**MIFARE Classic locks out your phone.** Apple does not allow apps to talk to MIFARE Classic
-tags, so **no iPhone can read a Bambu, Creality, QIDI or Snapmaker spool tag** — ever. That
-rules out roughly half the phones on the planet, permanently, by platform policy. Even on
-Android it isn't a given: MIFARE Classic is an NXP technology, and phones whose NFC chipset
-isn't from that family can't read it either.
+**MIFARE Classic bloquea tu teléfono.** Apple no permite que las aplicaciones se comuniquen con las etiquetas MIFARE Classic, por lo que **ningún iPhone puede leer una etiqueta de carrete Bambu, Creality, QIDI o Snapmaker**, nunca. Eso excluye aproximadamente la mitad de los teléfonos del planeta, de forma permanente, según la política de plataforma. Incluso en Android no es un hecho: MIFARE Classic es una tecnología NXP, y los teléfonos cuyo chipset NFC no es de esa familia tampoco pueden leerlo.
 
-**So we chose NTAG on purpose.** This is the reason TigerTag is built on NTAG and not MIFARE:
-an NTAG is read by **every NFC smartphone, with no restriction, no app whitelist, no vendor
-permission** — Android and iPhone alike. A tag anyone can read with the device already in
-their pocket isn't a vendor ecosystem; it's a **public, universal standard**. That was the
-whole point.
+**Así que elegimos NTAG a propósito.** Esta es la razón por la que TigerTag se basa en NTAG y no en MIFARE: **todos los teléfonos inteligentes NFC leen un NTAG, sin restricciones, sin lista blanca de aplicaciones, sin permiso de proveedor**, tanto Android como iPhone. Una etiqueta que cualquiera puede leer con el dispositivo en su bolsillo no es un ecosistema de proveedores; es un **estándar público y universal**. Ese era el punto.
 
-<sub>One honest limit: Prusa's OpenPrintTag uses NXP ICODE SLIX (ISO 15693), a family the
-ACR122U doesn't cover — those tags are outside the Pod's range.</sub>
+<sub>Un límite honesto: OpenPrintTag de Prusa usa NXP ICODE SLIX (ISO 15693), una familia que el ACR122U no cubre; esas etiquetas están fuera del rango del Pod.</sub>
 
-## Build one
+## Construye uno
 
-1. Print a shell — the compact
-   [**TigerPOD Mini**](https://makerworld.com/fr/models/3190348-tigerpod-mini-for-openspool-tigertag-rfid-filament)
-   (recommended) or the
-   [original](https://makerworld.com/fr/models/1289152-tigertag-io-open-spool-pod-for-rfid-filament),
-   both on MakerWorld. See [Two shells to print](#its-a-concept-not-a-fixed-product).
-2. Get two [ACR122U-compatible readers](https://amzn.to/4vok3d7), from any shop you like
-   (and some [NTAG 213 / 215 / 216 tags](https://amzn.to/3TzxGc7) to write on).
-3. Slide one reader into each slot — no screws, no glue, no wiring.
-4. Plug both into your computer (the splitter makes it one cable, but two ports work too).
-5. Install [Tiger Studio](https://github.com/TigerTag-Project/TigerTag-Studio-Manager) —
-   it picks the readers up automatically.
+1. Imprime una carcasa: la compacta
 
-### Bill of materials
+[**TigerPOD Mini**](https://makerworld.com/fr/models/3190348-tigerpod-mini-for-openbobina-tigertag-rfid-filament) (recomendado) o el [original](https://makerworld.com/fr/models/1289152-tigertag-io-open-bobina-pod-for-rfid-filament), ambos en MakerWorld. Consulte [Dos carcasas para imprimir](#más-que-tigertag-una-estación-nfc-universal).
 
-Rough prices, sourced separately — your mileage will vary by shop and region.
+2. Consigue dos [lectores compatibles con ACR122U] (https://amzn.to/4vok3d7), en cualquier tienda que desee
 
-| Part | Qty | Approx. price | Notes |
+(y algunas [etiquetas NTAG 213/215/216](https://amzn.to/3TzxGc7) para escribir).
+
+3. Introduce un lector en cada ranura: sin tornillos, sin pegamento ni cableado.
+
+4. Conecta ambos a su computadora (el divisor lo convierte en un solo cable, pero dos puertos también funcionan).
+
+5. Instala [Tiger Studio](https://github.com/TigerTag-Project/TigerTag-Studio-Manager) —
+
+detecta los lectores automáticamente.
+
+### Lista de materiales
+
+Precios aproximados, obtenidos por separado: su millaje variará según la tienda y la región.
+
+| Parte | Cantidad | Aprox. precio | Notas |
+
 |---|---|---|---|
-| [ACR122U-compatible NFC reader](https://amzn.to/4vok3d7) | 2 | ~€15–25 each | One per side of the spool |
-| [NTAG 213 / 215 / 216 tags](https://amzn.to/3TzxGc7) | 1 pack | ~€10–20 | Two chips per spool; a pack tags many spools |
-| 3D-printed shell | 1 | filament only | [Print it](https://makerworld.com/fr/models/1289152-tigertag-io-open-spool-pod-for-rfid-filament) yourself |
-| [USB splitter (2× USB-A F → 1× USB-A M)](https://amzn.to/4plgsv8) | 1 | ~€5–10 | Optional — two USB ports work too |
 
-### Reader compatibility
+| [Lector NFC compatible con ACR122U](https://amzn.to/4vok3d7) | 2 | ~15–25€ cada uno | Uno por lado del carrete |
 
-The ACR122U talks over **PC/SC** (PC/SC is the OS-level smart-card standard every reader
-of this class implements). Because the Pod builds on PC/SC rather than a vendor driver,
-the same setup runs on every desktop OS, and any PC/SC library can drive it:
+| [NTAG 213/215/216 etiquetas](https://amzn.to/3TzxGc7) | 1 paquete | ~10–20€ | Dos fichas por carrete; un paquete etiqueta muchos carretes |
 
-- **Windows** — recognised out of the box; the PC/SC service (`SCardSvr`) ships with
-  Windows. If a card-emulation "helper" driver hijacks the reader, remove it so the
-  device shows up as a plain PC/SC reader.
-- **macOS** — works with the built-in PC/SC stack (`pcscd`); no extra driver needed.
-- **Linux** — install PC/SC and the ACS/CCID driver, e.g.
-  `sudo apt install pcscd libacsccid1`, then make sure the `pcscd` service is running.
+| 3D-carcasa impresa | 1 | sólo filamento | [Imprimirlo](https://makerworld.com/fr/models/1289152-tigertag-io-open-bobina-pod-for-rfid-filament) usted mismo |
 
-## Or buy the kit
+| [Divisor USB (2× USB-A F → 1× USB-A M)](https://amzn.to/4plgsv8) | 1 | ~5–10€ | Opcional: dos puertos USB también funcionan |
 
-The electronics kit on [the shop](https://shop.tigertag.io/collections/tigertag-rfid-maker)
-costs less than sourcing the same parts yourself, the readers arrive with the project's
-official logo on them, and it funds the standard:
+### Compatibilidad del lector
 
-- [TigerPOD bundle — 2 readers + splitter](https://shop.tigertag.io/products/tigertag-player-bundle-2pcs-spliter)
-- [Single reader](https://shop.tigertag.io/products/tigertag-player)
-- [Splitter alone](https://shop.tigertag.io/products/tigertag-splitter)
+El ACR122U habla sobre **PC/SC** (PC/SC es el estándar de tarjeta inteligente a nivel de sistema operativo que implementa cada lector de esta clase). Debido a que el Pod se basa en PC/SC en lugar de en un controlador de proveedor, la misma configuración se ejecuta en todos los sistemas operativos de escritorio y cualquier biblioteca de PC/SC puede controlarlo:
 
-The bundle is the **electronics only** — two official-logo readers and the splitter. You
-still [print the TigerPOD shell](https://makerworld.com/fr/models/1289152-tigertag-io-open-spool-pod-for-rfid-filament)
-yourself and slide the readers in. Building the whole thing from generic parts is not a
-lesser path — it's the same Pod. That's what an open protocol means.
+- **Windows**: reconocido de fábrica; el servicio PC/SC (`SCardSvr`) se envía con
 
-## The ecosystem around it
+Ventanas. Si un controlador "ayudante" de emulación de tarjetas secuestra el lector, elimínelo para que el dispositivo aparezca como un lector PC/SC simple.
 
-![The TigerTag system — the TigerPOD, the Tiger Studio desktop app, and the mobile app all sharing one spool](assets/TigerPOD-hero-system.png)
+- **macOS**: funciona con la pila PC/SC integrada (`pcscd`); no se necesita ningún controlador adicional.
+
+- **Linux** — instale PC/SC y el controlador ACS/CCID, p.e.
+
+`sudo apt install pcscd libacsccid1`, luego asegúrese de que el servicio `pcscd` se esté ejecutando.
+
+## O compra el kit
+
+El kit electrónico en [la tienda](https://shop.tigertag.io/collections/tigertag-rfid-maker) cuesta menos que comprar las mismas piezas usted mismo, los lectores llegan con el logotipo oficial del proyecto y financia el estándar:
+
+- [Paquete TigerPOD: 2 lectores + divisor](https://shop.tigertag.io/products/tigertag-player-bundle-2pcs-spliter)
+
+- [Lector único](https://shop.tigertag.io/products/tigertag-player)
+
+- [Divisor solo](https://shop.tigertag.io/products/tigertag-splitter)
+
+El paquete es **solo electrónica**: dos lectores con el logotipo oficial y el divisor. Todavía debes [imprimir el carcasa TigerPOD](https://makerworld.com/fr/models/1289152-tigertag-io-open-bobina-pod-for-rfid-filament) tú mismo y deslizar los lectores. Construir todo a partir de partes genéricas no es un camino menor: es el mismo Pod. Eso es lo que significa un protocolo abierto.
+
+## El ecosistema que lo rodea
+
+![El sistema TigerTag: TigerPOD, la aplicación de escritorio Tiger Studio y la aplicación móvil comparten un solo carrete](assets/TigerPOD-hero-system.png)
 
 | | |
+
 |---|---|
-| **The protocol** | [TigerTag-RFID-Guide](https://github.com/TigerTag-Project/TigerTag-RFID-Guide) — the spec and the public registry (CC-BY-4.0, irrevocable implementation grant) |
-| **Tiger Studio** | [Desktop app](https://github.com/TigerTag-Project/TigerTag-Studio-Manager) (MIT) — inventory, printers, and the Pod's home |
-| **SDKs** | [JS](https://github.com/TigerTag-Project/TigerTag-SDK-JS) · [Python](https://github.com/TigerTag-Project/TigerTag-SDK-Python) (Apache-2.0) |
-| **Community** | [Discord](https://discord.gg/3Qv5TSqnJH) |
 
-On a phone you don't need a Pod at all — the mobile app uses the phone's own NFC.
-The Pod is the desktop's NFC.
+| **El protocolo** | [TigerTag-RFID-Guide](https://github.com/TigerTag-Project/TigerTag-RFID-Guide): la especificación y el registro público (CC-BY-4.0, concesión de implementación irrevocable) |
 
-## Read a tag in your own code
+| **Tiger Studio** | [Aplicación de escritorio](https://github.com/TigerTag-Project/TigerTag-Studio-Manager) (MIT): inventario, impresoras y la conexión con el Pod |
 
-TigerTag stores everything **on the chip** — no lookup, no network. Reading is always the
-same two steps, whatever the language:
+| **SDK** | [JS](https://github.com/TigerTag-Project/TigerTag-SDK-JS) · [Python](https://github.com/TigerTag-Project/TigerTag-SDK-Python) (Apache-2.0) |
 
-1. **Get the raw bytes** from the tag with any NFC library: the **7-byte UID** and the
-   **user memory, pages `0x04`–`0x27`** (36 pages × 4 bytes = **144 bytes**).
-2. **Decode offline** by handing those to the TigerTag SDK — `fromPages(uid, payload)` in
-   JS, `from_pages(uid, payload)` in Python. The SDK returns material, brand, colour,
-   temperatures, weight, and (optionally) verifies the signature.
+| **Comunidad** | [Discordia](https://discord.gg/3Qv5TSqnJH) |
 
-The SDK never touches the reader — you bring the bytes, it parses them. So you pair it
-with whichever NFC library fits your platform:
+En un teléfono no necesitas ningún Pod: la aplicación móvil utiliza el propio NFC del teléfono. El Pod es el NFC del escritorio.
 
-| Platform | NFC library | Notes |
+## Lee una etiqueta con tu propio código
+
+TigerTag almacena todo **en el chip**: sin búsqueda, sin red. La lectura son siempre los mismos dos pasos, sea cual sea el idioma:
+
+1. **Consigue los bytes sin procesar** de la etiqueta con cualquier biblioteca NFC: el **UID de 7 bytes** y el
+
+**memoria de usuario, páginas `0x04`–`0x27`** (36 páginas × 4 bytes = **144 bytes**).
+
+2. **Descodifique sin conexión** entregándolos al SDK TigerTag — `fromPages(uid, payload)` en
+
+JS, `from_pages(uid, payload)` en Python. El SDK devuelve material, marca, color, temperaturas, peso y (opcionalmente) verifica la firma.
+
+El SDK nunca toca al lector: usted trae los bytes y él los analiza. Así que lo emparejas con cualquier biblioteca NFC que se ajuste a tu plataforma:
+
+| Plataforma | Biblioteca NFC | Notas |
+
 |---|---|---|
-| **Desktop — Node / Electron** | [`nfc-pcsc`](https://www.npmjs.com/package/nfc-pcsc) | What Tiger Studio uses to drive the Pod's ACR122U readers over PC/SC |
-| **Desktop — Python** | [`nfcpy`](https://nfcpy.readthedocs.io) or [`pyscard`](https://pyscard.sourceforge.io) (PC/SC) | `pyscard` matches the ACR122U's PC/SC path directly |
-| **Android** | `MifareUltralight` / `NfcA` (built-in) | `readPages(4)`, four pages at a time |
-| **iOS** | CoreNFC (`NFCTagReaderSession`) | Raw MiFare read of pages 4–39 |
-| **Flutter** | [`flutter_nfc_kit`](https://pub.dev/packages/flutter_nfc_kit) | `transceive` the NTAG `READ` command (`0x30`) |
-| **Arduino / ESP32** | [`MFRC522`](https://github.com/miguelbalboa/rfid) | `MIFARE_Read` page by page, ship UID + payload over serial |
 
-Runnable, copy-paste examples for each are in the SDK repos:
-[JS](https://github.com/TigerTag-Project/TigerTag-SDK-JS/blob/main/examples/integrate_nfc_sdk.js)
-· [Python](https://github.com/TigerTag-Project/TigerTag-SDK-Python/blob/main/examples/integrate_nfc_sdk.py).
+| **Escritorio — Nodo/Electrón** | [`nfc-pcsc`](https://www.npmjs.com/package/nfc-pcsc) | Qué utiliza Tiger Studio para controlar los lectores ACR122U del Pod a través de PC/SC |
 
-### Test the Pod with the built-in playground
+| **Escritorio — Python** | [`nfcpy`](https://nfcpy.readthedocs.io) o [`pyscard`](https://pyscard.sourceforge.io) (PC/SC) | `pyscard` coincide directamente con la ruta PC/SC de ACR122U |
 
-Both SDKs ship a **playground** — a small local server plus a web page — so you can try a
-Pod without writing any code first:
+| **Android** | `MifareUltralight` / `NfcA` (integrado) | `readPages(4)`, cuatro páginas a la vez |
 
-- **[JS SDK](https://github.com/TigerTag-Project/TigerTag-SDK-JS)** — `npm install ws nfc-pcsc`
-  then `npm run playground` and open `http://localhost:7432/tools/playground.html`. It
-  connects straight to the ACR122U over PC/SC and pushes **live card events** to the page:
-  drop a spool in the Pod and watch it decode in the browser.
-- **[Python SDK](https://github.com/TigerTag-Project/TigerTag-SDK-Python)** — run
-  `python3 tools/server.py` and open the same page to inspect and diff payloads.
+| **iOS** | Core NFC (`NFCTagReaderSession`) | Lectura sin procesar de MiFare de las páginas 4 a 39 |
 
-It's the fastest way to confirm your readers are seen and your tags parse correctly.
+| **Flutter** | [`flutter_nfc_kit`](https://pub.dev/packages/flutter_nfc_kit) | `transceive` el comando NTAG `READ` (`0x30`) |
 
-## FAQ
+| **Arduino/ESP32** | [`MFRC522`](https://github.com/miguelbalboa/rfid) | `MIFARE_Read` página por página, UID de envío + carga útil a través de serie |
 
-**Can I use just one reader?**
-Yes, but you lose the drop-and-go convenience and the automatic Twin Tag sync — see
-[Why two chips and two readers](#why-two-chips-and-two-readers).
+En los repositorios del SDK se encuentran ejemplos ejecutables de copiar y pegar para cada uno: [JS](https://github.com/TigerTag-Project/TigerTag-SDK-JS/blob/main/examples/integrate_nfc_sdk.js) · [Python](https://github.com/TigerTag-Project/TigerTag-SDK-Python/blob/main/examples/integrate_nfc_sdk.py).
 
-**My reader isn't detected.**
-Make sure it's a genuine ACR122U-compatible (PC/SC) reader. On Linux, start the `pcscd`
-service and install the CCID driver. Unplug/replug once, then relaunch Tiger Studio.
+### Prueba el Pod con el entorno de pruebas integrado
 
-**NTAG 213 vs 215 vs 216 — which one?**
-They differ only in memory: 213 (~144 B), 215 (~504 B), 216 (~888 B). Any of them holds a
-TigerTag record; pick 215/216 if you want more headroom. All three work in the Pod.
+Ambos SDK incluyen un **patio de juegos** (un pequeño servidor local más una página web) para que puedas probar un Pod sin escribir ningún código primero:
 
-**Which spools fit?**
-About **99% of 1 kg spools**, regardless of type — plastic masterspools, cardboard
-spools, non-reusable plastic spools, and refills all sit in the Pod.
+- **[SDK de JS](https://github.com/TigerTag-Project/TigerTag-SDK-JS)** — `npm install ws nfc-pcsc`
 
-**Can I reuse the tags?**
-Yes — TigerTags are never locked. Erase and rewrite them as new TigerTags indefinitely,
-or convert them to a plain NDEF tag for another NFC use — home automation, connected
-objects, a URL, a business card — and back again. The chip is a reusable asset, not
-disposable packaging.
+luego `npm run playground` y abra `http://localhost:7432/tools/playground.html`. Se conecta directamente al ACR122U a través de PC/SC y envía **eventos de tarjeta en vivo** a la página: coloque un carrete en el Pod y observe cómo se decodifica en el navegador.
 
-**Can I use the Pod for non-TigerTag NFC work?**
-Yes. It's two standard ACR122U readers, so it can read, write, rewrite and erase anything
-an ACR122U supports (full CRUD, in developer terms): ISO 14443 A/B, MIFARE (Classic,
-Ultralight, DESFire), FeliCa, Topaz/Jewel, and NFC Forum types 1–4. The Pod is a universal
-NFC read/write station that happens to be spool-shaped.
+- **[SDK de Python](https://github.com/TigerTag-Project/TigerTag-SDK-Python)** — ejecutar
 
-**Does it need internet?**
-No. The Pod reads and writes locally; nothing phones home.
+`python3 tools/server.py` y abra la misma página para inspeccionar y diferenciar cargas útiles.
 
-## Support the project
+Es la forma más rápida de confirmar que sus lectores sean vistos y que sus etiquetas se analicen correctamente.
 
-TigerSystem is a personal, community open-source project, built and maintained in free time.
-Everything stays free; if it saves you a spool or two, you can support it:
+## Preguntas frecuentes
 
-- ☕ [Buy Me a Coffee](https://buymeacoffee.com/benoitl)
+**¿Puedo usar solo un lector?** Sí, pero pierde la comodidad de colocar y usar y la sincronización automática de Twin Tag; consulte [Por qué dos chips y dos lectores](#es-un-concepto-no-un-producto-fijo).
+
+**No se detecta mi lector.** Asegúrese de que sea un lector genuino compatible con ACR122U (PC/SC). En Linux, inicie el servicio `pcscd` e instale el controlador CCID. Desenchufe/vuelva a enchufar una vez, luego reinicie Tiger Studio.
+
+**NTAG 213 vs 215 vs 216: ¿cuál?** Se diferencian sólo en la memoria: 213 (~144 B), 215 (~504 B), 216 (~888 B). Cualquiera de ellos posee un registro TigerTag; Elija 215/216 si desea más espacio libre. Los tres trabajan en el Pod.
+
+**¿Qué carretes encajan?** Aproximadamente el **99 % de los carretes de 1 kg**, independientemente del tipo: los carretes maestros de plástico, los carretes de cartón, los carretes de plástico no reutilizables y los recambios se colocan en el Pod.
+
+**¿Puedo reutilizar las etiquetas?** Sí, las TigerTags nunca se bloquean. Bórrelos y reescríbalos como nuevos TigerTags indefinidamente, o conviértalos en una etiqueta NDEF simple para otro uso NFC (domótica, objetos conectados, una URL, una tarjeta de presentación) y viceversa. El chip es un activo reutilizable, no un envase desechable.
+
+**¿Puedo usar el Pod para trabajos que no sean TigerTag NFC?** Sí. Son dos lectores ACR122U estándar, por lo que pueden leer, escribir, reescribir y borrar cualquier cosa que admita un ACR122U (CRUD completo, en términos de desarrollador): ISO 14443 A/B, MIFARE (Classic, Ultralight, DESFire), FeliCa, Topaz/Jewel y NFC Tipos de foro 1–4. El Pod es una estación de lectura/escritura universal NFC que tiene forma de carrete.
+
+**¿Necesita Internet?** No. El Pod lee y escribe localmente; nada llama a casa.
+
+## Apoya el proyecto
+
+TigerSystem es un proyecto comunitario personal de código abierto, creado y mantenido en su tiempo libre. Todo sigue siendo gratis; Si te ahorra uno o dos carretes, puedes respaldarlo:
+
+- ☕ [Cómprame un café](https://buymeacoffee.com/benoitl)
+
 - ❤️ [Ko-fi](https://ko-fi.com/tigersystemio)
+
 - 💙 [PayPal](https://paypal.me/tigersystemio)
 
-Support goes to the maintainer — never required, always appreciated.
+El soporte va para el mantenedor: nunca es necesario, siempre se agradece.
 
-## Contributing
+## Colabora
 
-Remixes of the shell, build photos, doc fixes, and translations are all welcome — see
-[CONTRIBUTING.md](CONTRIBUTING.md).
+Se aceptan versiones modificadas de la carcasa, fotos de montaje, correcciones de documentos y traducciones; consulte [CONTRIBUTING.md](CONTRIBUTING.md).
 
-## Licence
+## Licencia
 
-The documentation in this repository is **CC-BY-4.0** (see [LICENSE](LICENSE)).
-The TigerTag name and logo are trademarks of TigerTag Corp — usage terms in
-[TRADEMARK.md](https://github.com/TigerTag-Project/TigerTag-RFID-Guide/blob/main/TRADEMARK.md).
+La documentación en este repositorio es **CC-BY-4.0** (ver [LICENCIA](LICENSE)). El nombre y el logotipo TigerTag son marcas comerciales de TigerTag Corp; términos de uso en [TRADEMARK.md](https://github.com/TigerTag-Project/TigerTag-RFID-Guide/blob/main/TRADEMARK.md).
 
-`assets/` also carries the official "Tiger" icon kit: neutral (no text) and
-"TIGER TAG"-marked variants, each shipped as overflow (display as-is), contained, and
-square (for masked contexts like round favicons or adaptive icons) compositions. Same
-trademark terms apply — full usage guidelines are in
-[brand/README.md](https://github.com/TigerTag-Project/TigerTag-RFID-Guide/blob/main/brand/README.md)
-of the main protocol repo.
+`assets/` también incluye el kit oficial de íconos "Tiger": variantes neutrales (sin texto) y marcadas con "TIGER TAG", cada una enviada como composiciones desbordadas (se muestran tal como están), contenidas y cuadradas (para contextos enmascarados como favicons redondos o íconos adaptativos). Se aplican los mismos términos de marca registrada: las pautas de uso completas se encuentran en [brand/README.md](https://github.com/TigerTag-Project/TigerTag-RFID-Guide/blob/main/brand/README.md) del repositorio de protocolo principal.
 
-Website: [tigersystem.io](https://tigersystem.io) · Shop: [shop.tigertag.io](https://shop.tigertag.io/collections/tigertag-rfid-maker)
+Sitio web: [tigersystem.io](https://tigersystem.io) · Tienda: [shop.tigertag.io](https://shop.tigertag.io/collections/tigertag-rfid-maker)
 
-Questions, partnerships, press: [tigertag@tigertag.io](mailto:tigertag@tigertag.io)
+Preguntas, asociaciones, prensa: [tigertag@tigertag.io](mailto:tigertag@tigertag.io)
 
-### Media kit
+### Material para prensa
 
-Press and partners are welcome to use these, under [CC-BY-4.0](LICENSE) (credit TigerTag):
+La prensa y los socios pueden utilizarlos, en [CC-BY-4.0](LICENSE) (crédito TigerTag):
 
 | | |
-|---|---|
-| **Hero / line-up shots** | [`assets/lineup/`](assets/lineup) — the full Pod line-up, ideal as a cover image |
-| **Product shots** | [`assets/pods/`](assets/pods) — 34 individual Pods, one per colour and finish |
-| **The system** | [`TigerPOD-hero-system.png`](assets/TigerPOD-hero-system.png) — Pod + desktop app + mobile app |
-| **The Mini** | [`TigerPOD-mini.png`](assets/TigerPOD-mini.png) — the compact Mini model (transparent PNG) |
-| **In use** | [`TigerPOD-demo.mp4`](assets/TigerPOD-demo.mp4) · [`TigerPOD-demo.gif`](assets/TigerPOD-demo.gif) |
-| **Parts** | [`TigerPOD-reader-acr122u.jpg`](assets/TigerPOD-reader-acr122u.jpg) · [`TigerPOD-splitter.jpg`](assets/TigerPOD-splitter.jpg) |
 
-Each image comes in three forms: an optimised JPG for the web, a full-resolution original
-in `hd/`, and a transparent background-removed PNG in `cutout/`.
+|---|---|
+
+| **Fotos de héroe/alineación** | [`assets/lineup/`](assets/lineup): la línea completa de Pod, ideal como imagen de portada |
+
+| **Fotos del producto** | [`assets/pods/`](assets/pods) — 34 Pods individuales, uno por color y acabado |
+
+| **El sistema** | [`TigerPOD-hero-system.png`](assets/TigerPOD-hero-system.png) — Pod + aplicación de escritorio + aplicación móvil |
+
+| **El Mini** | [`TigerPOD-mini.png`](assets/TigerPOD-mini.png) — el modelo Mini compacto (PNG transparente) |
+
+| **En uso** | [`TigerPOD-demo.mp4`](assets/TigerPOD-demo.mp4) · [`TigerPOD-demo.gif`](assets/TigerPOD-demo.gif) |
+
+| **Piezas** | [`TigerPOD-reader-acr122u.jpg`](assets/TigerPOD-reader-acr122u.jpg) · [`TigerPOD-splitter.jpg`](assets/TigerPOD-splitter.jpg) |
+
+Cada imagen viene en tres formatos: un JPG optimizado para la web, un original de resolución completa en `hd/` y un PNG transparente sin fondo en `cutout/`.
 
 ---
 
-<sub>Some hardware links above are Amazon affiliate links: as an Amazon Associate,
-TigerTag earns from qualifying purchases, at no extra cost to you. It helps fund the
-open protocol.</sub>
+<sub>Algunos enlaces de hardware anteriores son enlaces de afiliados de Amazon: como asociado de Amazon, TigerTag gana con compras que califican, sin costo adicional para usted. Ayuda a financiar el protocolo abierto.</sub>
 
-<sub>AI agents & LLMs: a machine-readable summary of this project is in
-[llms.txt](llms.txt).</sub>
+Agentes <sub>AI y LLM: un resumen legible por máquina de este proyecto se encuentra en [llms.txt](llms.txt).</sub>

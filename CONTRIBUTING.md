@@ -1,32 +1,23 @@
-# Contributing to TigerPOD
+# Colabora con TigerPOD
 
-TigerPOD is an open project — improvements to the design, the docs, and the build
-experience are all welcome.
+TigerPOD es un proyecto abierto. Son bienvenidas las mejoras del diseño, la documentación y la experiencia de montaje.
 
-## Ways to help
+## Cómo puedes ayudar
 
-- **Improve the shell** — a better fit, easier printing, or a variant for another spool
-  size. Share your remix on
-  [MakerWorld](https://makerworld.com/fr/models/1289152-tigertag-io-open-spool-pod-for-rfid-filament)
-  and open an issue linking to it.
-- **Report what didn't fit** — a spool, a reader variant, or an OS quirk. Open an issue
-  with the model and what happened.
-- **Fix or extend the docs** — corrections, translations, clearer steps. Open a pull
-  request.
-- **Show your build** — photos of your printed Pod help everyone. Drop them in an issue
-  or on the [Discord](https://discord.gg/3Qv5TSqnJH).
+- **Mejorar la carcasa:** proponer un ajuste mejor, una impresión más sencilla o una variante para otro tamaño de bobina. Comparte tu versión en [MakerWorld](https://makerworld.com/fr/models/1289152-tigertag-io-open-spool-pod-for-rfid-filament) y abre una incidencia con el enlace.
+- **Avisar de problemas de compatibilidad:** indica qué bobina, variante de lector o sistema operativo probaste y qué ocurrió.
+- **Corregir o ampliar la documentación:** puedes proponer correcciones, traducciones o instrucciones más claras mediante una solicitud de cambios.
+- **Enseñar tu montaje:** las fotos del Pod que hayas impreso pueden ayudar a otras personas. Compártelas en una incidencia o en [Discord](https://discord.gg/3Qv5TSqnJH).
 
-## Before you open a PR
+## Antes de proponer cambios
 
-- Keep changes focused and describe what you changed and why.
-- For hardware changes, say which printer/filament you tested on and how the readers fit.
+- Procura que cada cambio tenga un objetivo claro y explica qué has cambiado y por qué.
+- Si modificas el diseño físico, indica con qué impresora y filamento lo probaste y cómo encajan los lectores.
 
-## Questions
+## Preguntas
 
-Chat with the community on [Discord](https://discord.gg/3Qv5TSqnJH), or email
-[tigertag@tigertag.io](mailto:tigertag@tigertag.io).
+Puedes conversar con la comunidad en [Discord](https://discord.gg/3Qv5TSqnJH) o escribir a [tigertag@tigertag.io](mailto:tigertag@tigertag.io).
 
-## Licence
+## Licencia
 
-By contributing, you agree that your contributions to this repository are licensed under
-[CC-BY-4.0](LICENSE), the same licence as the project.
+Al colaborar, aceptas que tus aportaciones a este repositorio se distribuyan bajo la licencia [CC-BY-4.0](LICENSE), la misma que se aplica al proyecto.
